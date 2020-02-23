@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="blacken-selection",
-    version="0.1.3",
+    version="0.2.0",
     description="Apply black formatter for a piece of python source code",
     author="Balazs Gibizer",
     author_email="gibizer@gmail.com",
