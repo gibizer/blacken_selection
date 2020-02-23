@@ -5,8 +5,8 @@ file or project.
 Usage
 -----
 ``` schell script
-$ pip install blacken_selection
-$ blacken_selection -h
+$ pip install blacken-selection
+$ blacken-selection -h
 usage: Apply the black code formatter for a piece of python source code
 
 positional arguments:
@@ -17,7 +17,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -l LINE_LENGTH, --line-length LINE_LENGTH
                         How many characters per line to allow. [default: 88]
-$ blacken_selection "def main(): pass"
+$ blacken-selection "def main(): pass"
 def main():
     pass
 ```
@@ -34,9 +34,9 @@ But there is a solution:
 * Install the ```xclip``` command line tool, we will use it to grab the
 code selection in PyCharm via the clipboard
 * Install blacken_selection as described above
-* Grab the simple shell script [blacken_selection_xclip.sh](https://raw.githubusercontent.com/gibizer/blacken_selection/master/blacken_selection_xclip.sh)
+* Grab the simple shell script [blacken-selection-xclip.sh](https://raw.githubusercontent.com/gibizer/blacken_selection/master/blacken-selection-xclip.sh)
 
-Setup ```blacken_selection_xclip.sh``` as an external tool in PyCharm:
+Setup ```blacken-selection-xclip.sh``` as an external tool in PyCharm:
 ```
 File -> Settings -> Tools -> External Tools
 ```
@@ -45,7 +45,7 @@ Click the + icon to add a new external tool with the following values:
 ```
     Name: blacken
     Description: Blacken a piece of python code
-    Program: <absolute path for your blacken_selection_xclip.sh>
+    Program: <absolute path for your blacken-selection-xclip.sh>
     Arguments:
 ```
 Select a piece of python source code in your editor and from the right click
