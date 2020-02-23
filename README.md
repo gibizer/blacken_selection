@@ -53,4 +53,12 @@ context menu select:
 ```
 External Tools -> blacken
 ```
+Or you can confiugre a shortcut (e.g. Shift+Alt+B) to trigger the tool in:
+```
+Settings -> Keymap-> External Tools -> blacken
+```
 
+The tool will grab the selected text form the clipboard, format it with black,
+and the copy the formatted code back to the clipboard. So you can basically do
+the ```select```, ```shift+alt+B```, ```insert``` in PyCharm to format a piece
+of python code with black.
