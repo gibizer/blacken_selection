@@ -35,7 +35,7 @@ def indent_lines(lines, amount):
     return new_lines
 
 
-def format_str(source, line_length):
+def format_str(source, line_length, target_version, skip_string_normalization):
     lines = []
     for line in source.split("\n"):
         lines.append(line.rstrip("\n"))
@@ -47,7 +47,12 @@ def format_str(source, line_length):
 
     hunk = dedent_lines(lines, min_indent)
 
-    mode = black.FileMode(line_length=line_length - min_indent, is_pyi=True)
+    mode = black.FileMode(
+        line_length=line_length - min_indent,
+        is_pyi=True,
+        string_normalization=not skip_string_normalization,
+        target_versions={black.TargetVersion[target_version.upper()]},
+    )
     formatted_hunk = black.format_str(src_contents="\n".join(hunk), mode=mode)
 
     formatted_lines = formatted_hunk.split("\n")
@@ -75,19 +80,39 @@ def parse_args():
         default=88,
         help="How many characters per line to allow. [default: 88]",
     )
+    argparser.add_argument(
+        "-t",
+        "--target-version",
+        type=str,
+        choices=["py27", "py33", "py34", "py35", "py36", "py37", "py38"],
+        default="py36",
+        help="Python versions that should be supported by Black's output.",
+    )
+    argparser.add_argument(
+        "-S",
+        "--skip-string-normalization",
+        action="store_true",
+        default=False,
+        help="Don't normalize string quotes or prefixes.",
+    )
     return argparser.parse_args()
 
 
 def main():
     args = parse_args()
-    if not args.SOURCE:
+    source = args.SOURCE
+    if not source:
         import sys
 
         with sys.stdin:
             source = sys.stdin.read()
-        format_str(source, args.line_length)
-    else:
-        format_str(args.SOURCE, args.line_length)
+
+    format_str(
+        source,
+        args.line_length,
+        args.target_version,
+        args.skip_string_normalization,
+    )
 
 
 if __name__ == "__main__":
